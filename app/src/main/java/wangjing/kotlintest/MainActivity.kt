@@ -1,10 +1,10 @@
 package wangjing.kotlintest
 
+//一、layout的引入
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.view.View
 import android.widget.Toast
-//一、layout的引入
 import kotlinx.android.synthetic.main.activity_main.*
 
 // 二、类的写法
@@ -13,6 +13,14 @@ import kotlinx.android.synthetic.main.activity_main.*
 // 3.继承自某个类用：
 // 4.构造方法class Person(name: String, surname: String) { init{ ... } }，没有任何内容初始化时不需要写init及{}
 class MainActivity : AppCompatActivity() {
+
+    // 五、基本类型的变量的定义初始化
+    // 1.var可变，val不可变
+    val i = 12 // An Int
+    val iHex = 0x0f // 一个十六进制的Int类型
+    val l = 3L // A Long
+    val d = 3.5 // A Double
+    val f = 3.5F // A Float
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -26,8 +34,23 @@ class MainActivity : AppCompatActivity() {
         niceToast("Hello", "MyTag", Toast.LENGTH_SHORT)
 
         message.setOnClickListener(View.OnClickListener{
-            startActivity(intent)
+            startActivity(intent) //TODO 怎么跳转？
         })
+
+        // 五、基本变量
+        // 迭代String
+        val ss = "Example"
+        val c = ss[2] // 这是一个字符'a'
+        val s2 = "Example"
+        for(c in s2){
+            print(c)
+        }
+
+        // 六、类属性
+        val person = Person()
+        person.name = "Wangjing"
+        val name = person.name
+        message.text = name
     }
 
     // 三、方法函数的写法
