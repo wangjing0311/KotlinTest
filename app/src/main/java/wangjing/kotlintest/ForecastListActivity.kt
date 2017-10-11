@@ -27,5 +27,7 @@ class ForecastListActivity : AppCompatActivity() {
         val forecastList = findViewById(R.id.forecast_list) as RecyclerView
         forecastList.layoutManager = LinearLayoutManager(this)
         forecastList.adapter = ForecastListAdapter(items)
+
+//        val fList:RecyclerView = find(R.id.forecast_list)//Anko写法
     }
 }

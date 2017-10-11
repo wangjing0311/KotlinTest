@@ -2,6 +2,8 @@ package wangjing.kotlintest
 
 //一、layout的引入
 import android.os.Bundle
+import android.os.Handler
+import android.os.Message
 import android.support.v7.app.AppCompatActivity
 import android.view.View
 import android.widget.Toast
@@ -22,6 +24,18 @@ class MainActivity : AppCompatActivity() {
     val d = 3.5 // A Double
     val f = 3.5F // A Float
 
+    private var thread: Thread? = null
+    private var handler: Handler = object : Handler() {     //此处的object 要加，否则无法重写 handlerMessage
+        override fun handleMessage(msg: Message?) {
+            super.handleMessage(msg)
+            //八、多线程：主线程
+            if (msg?.what == 0) {
+                Toast.makeText(applicationContext, "主线程消息", Toast.LENGTH_LONG).show()
+            }
+
+        }
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -33,7 +47,7 @@ class MainActivity : AppCompatActivity() {
         toast("Hello 你好", Toast.LENGTH_LONG)
         niceToast("Hello", "MyTag", Toast.LENGTH_SHORT)
 
-        message.setOnClickListener(View.OnClickListener{
+        message.setOnClickListener(View.OnClickListener {
             startActivity(intent) //TODO 怎么跳转？
         })
 
@@ -42,7 +56,7 @@ class MainActivity : AppCompatActivity() {
         val ss = "Example"
         val c = ss[2] // 这是一个字符'a'
         val s2 = "Example"
-        for(c in s2){
+        for (c in s2) {
             print(c)
         }
 
@@ -51,6 +65,10 @@ class MainActivity : AppCompatActivity() {
         person.name = "Wangjing"
         val name = person.name
         message.text = name
+
+        // 七、执行网络请求要在子线程里边调用，不能在UI线程
+        myTherad()
+        thread?.start()
     }
 
     // 三、方法函数的写法
@@ -72,6 +90,17 @@ class MainActivity : AppCompatActivity() {
         Toast.makeText(this, "[$tag] $message", length).show()
     }
 
-
+    // 八、多线程用法，子线程
+    private fun myTherad() {
+        thread = Thread(Runnable {
+            kotlin.run {
+                val request = Request("https://www.baidu.com/")
+                request?.run()
+                var message = Message()
+                message.what = 0
+                handler.sendMessage(message)
+            }
+        })
+    }
 
 }
