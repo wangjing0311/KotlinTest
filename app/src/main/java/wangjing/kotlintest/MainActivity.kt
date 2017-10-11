@@ -8,6 +8,8 @@ import android.support.v7.app.AppCompatActivity
 import android.view.View
 import android.widget.Toast
 import kotlinx.android.synthetic.main.activity_main.*
+import org.jetbrains.anko.async
+import org.jetbrains.anko.uiThread
 
 // 二、类的写法
 // 1.类的写法class
@@ -67,8 +69,16 @@ class MainActivity : AppCompatActivity() {
         message.text = name
 
         // 七、执行网络请求要在子线程里边调用，不能在UI线程
-        myTherad()
-        thread?.start()
+        // 1.Handler+Thread方法
+//        myTherad()
+//        thread?.start()
+        // 2.kotlin自己的请求
+        async(){   //异步执行发起请求
+            val request = Request("https://www.baidu.com/")
+            uiThread {  //请求完毕之后线程切换
+//                Log.e("123456", "City Name :"+result.city.name)
+            }
+        }
     }
 
     // 三、方法函数的写法

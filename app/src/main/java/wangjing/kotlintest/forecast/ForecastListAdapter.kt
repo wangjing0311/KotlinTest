@@ -1,4 +1,4 @@
-package wangjing.kotlintest
+package wangjing.kotlintest.forecast
 
 import android.support.v7.widget.RecyclerView
 import android.view.ViewGroup
