@@ -5,6 +5,9 @@ import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
 
+/**
+ * 四、RecyclerView的使用，及展示列表
+ */
 class ForecastListActivity : AppCompatActivity() {
 
     private val items = listOf(

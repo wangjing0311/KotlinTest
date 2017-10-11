@@ -6,6 +6,7 @@ import android.widget.TextView
 
 /**
  * Created by wangjing on 2017/10/11.
+ * RecyclerView的Adapter
  */
 class ForecastListAdapter(val items: List<String>) : RecyclerView.Adapter<ForecastListAdapter.ViewHolder>() {
 
